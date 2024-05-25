@@ -1,14 +1,18 @@
 package service;
 
 
-import controllers.HotelController;
+import java.io.IOException;
 
+import controllers.DBUtils;
+import controllers.HotelController;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-
+import javafx.scene.input.MouseEvent;
 import models.Hotel;
+import models.RoomType;
 
 
 public class HotelViewService {
@@ -86,6 +90,28 @@ public class HotelViewService {
 	            showAlert("Invalid Input", "Invalid Convention or Phone Number Value", "Please enter valid integer values for the convention and phone number fields.");
 	        }
 	    }
+	    
+	    
+	    @FXML
+	    private void handleHotelSelection(MouseEvent event) {
+	        String selectedHotelString = hotelListView.getSelectionModel().getSelectedItem();
+	        if (selectedHotelString != null) {
+	            String[] parts = selectedHotelString.split(" - ");
+	            int hotelNum = Integer.parseInt(parts[1]);
+
+	            Hotel selectedHotel = hotelController.getHotelById(hotelNum);
+	            if (selectedHotel != null) {
+	                IdField.setText(String.valueOf(selectedHotel.getHotel_id()));
+	                nameField.setText(selectedHotel.getName());
+	                conventionField.setText(String.valueOf(selectedHotel.getConvention()));
+	                countryField.setText(selectedHotel.getCountry());
+	                cityField.setText(selectedHotel.getCity());
+	                addressField.setText(selectedHotel.getAddress());
+	                emailField.setText(selectedHotel.getEmail());
+	                phoneNumberField.setText(String.valueOf(selectedHotel.getPhoneNumber()));
+	            }
+	        }
+	    }
 
 
 	    @FXML
@@ -153,4 +179,54 @@ public class HotelViewService {
 	        alert.setContentText(content);
 	        alert.showAndWait();
 	    }
+	    @FXML
+		public void switchToHome(ActionEvent event) throws IOException {
+		    	DBUtils.changeScene(event, "/views/admin/HomePage.fxml", "Admin Dashboard", null);
+		
+		}
+	    @FXML
+		public void handleDetails(ActionEvent event) throws IOException {
+		    	DBUtils.changeScene(event, "/views/admin/Details.fxml", "Admin Dashboard", null);
+		
+		}
+	    @FXML
+	    public void switchToAdminRoom(ActionEvent event) throws IOException {
+	    	DBUtils.changeScene(event, "/views/admin/RoomManagement.fxml", "Admin Dashboard", null);
+	    }
+	    
+	    @FXML
+	    public void switchToAdminAircraft(ActionEvent event) throws IOException {
+	    	DBUtils.changeScene(event, "/views/admin/Aircraft-view.fxml", "Admin Dashboard", null);
+	    }
+	    
+	    @FXML
+	    public void switchToAdminAirline(ActionEvent event) throws IOException {
+	    	DBUtils.changeScene(event, "/views/admin/Airline-view.fxml", "Admin Dashboard", null);
+	    }
+	    @FXML
+	    public void switchToAdminHotel(ActionEvent event) throws IOException {
+	    	DBUtils.changeScene(event, "/views/admin/Hotel-view.fxml", "Admin Dashboard", null);
+	    }
+	    @FXML
+	    public void switchToServices(ActionEvent event) throws IOException {
+	    	DBUtils.changeScene(event, "/views/admin/services.fxml", "Admin Dashboard", null);
+	    }
+	    @FXML
+	    public void switchToAdminUser(ActionEvent event) throws IOException {
+	    	DBUtils.changeScene(event, "/views/admin/UserManagement.fxml", "Admin Dashboard", null);
+	    }
+	    
+	    @FXML
+	    public void logout(ActionEvent event) throws IOException {
+	    	DBUtils.changeScene(event, "/views/auth/Welcome-view.fxml", "Welcome", null);
+	    }
+	    
+	    @FXML
+	    public void BackPage(ActionEvent event) throws IOException {
+	    	DBUtils.changeScene(event, "/views/auth/Welcome-view.fxml", "Welcome", null);
+	    }
+	       @FXML
+	       public void switchToAdminRevFlights (ActionEvent event) throws IOException {
+	          	DBUtils.changeScene(event, "/views/admin/Rev-flight-view.fxml", "Welcome", null);
+	          }
 }

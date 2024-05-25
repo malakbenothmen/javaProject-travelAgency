@@ -20,7 +20,7 @@ public class RoomController {
 
     private static Map<String, Integer> availabilityMap;
 
-    static {
+    static { 
         availabilityMap = new HashMap<>();
         availabilityMap.put("Available", 1);
         availabilityMap.put("Not Available", 0);
@@ -62,7 +62,8 @@ public class RoomController {
         }
         return -1;
     }
-
+    
+   // public static List<Room> getRoomsByHotelId(int Hotelid) {}
     public static List<Room> getAllRooms() {
         List<Room> rooms = new ArrayList<>();
         String sql = "SELECT * FROM room";

@@ -2,16 +2,22 @@ package service;
 
 import controllers.AircraftController;
 import controllers.AirlineController;
+import controllers.DBUtils;
 import controllers.FlightController;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import models.Aircraft;
 import models.Airline;
 import models.Flight;
+import models.RoomType;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -46,13 +52,14 @@ public class FlightViewService {
     private ListView<String> flightListView;
 
     private FlightController flightController;
-    private AirlineController airlineController;
+    private AirlineController airlineController; 
     private AircraftController aircraftController;
 
     private Map<String, Integer> aircraftNameToIdMap = new HashMap<>();
     private Map<String, Integer> airlineNameToIdMap = new HashMap<>();
     private Map<Integer, String> aircraftIdToNameMap = new HashMap<>();
     private Map<Integer, String> airlineIdToNameMap = new HashMap<>();
+	private ComboBoxBase<LocalDate> darrivalField;
 
     public FlightViewService() {
         flightController = new FlightController();
@@ -70,7 +77,7 @@ public class FlightViewService {
     private void populateAircraftComboBox() {
         List<Aircraft> aircrafts = aircraftController.getAllAircrafts();
         for (Aircraft aircraft : aircrafts) {
-            String name = aircraft.getModel(); // Assume getName() method exists in Aircraft class
+            String name = aircraft.getModel(); 
             int id = aircraft.getAircraft_id();
             aircraftIdToNameMap.put(id, name);
             aircraftNameToIdMap.put(name, id);
@@ -81,7 +88,7 @@ public class FlightViewService {
     private void populateAirlineComboBox() {
         List<Airline> airlines = airlineController.getAllAirlines();
         for (Airline airline : airlines) {
-            String name = airline.getName(); // Assume getName() method exists in Airline class
+            String name = airline.getName(); 
             int id = airline.getAirline_id();
             airlineIdToNameMap.put(id, name);
             airlineNameToIdMap.put(name, id);
@@ -130,6 +137,42 @@ public class FlightViewService {
         clearFields();
     }
 
+    
+    @FXML
+    private void handleFlightSelection(MouseEvent event) {
+        String selectedFlightString = flightListView.getSelectionModel().getSelectedItem();
+        if (selectedFlightString != null) {
+            String[] parts = selectedFlightString.split(" - ");
+            int flightId = Integer.parseInt(parts[0]);
+            String flightNum = parts[1];
+            String origin = parts[2];
+            String destination = parts[3];
+            String[] aircraftDetails = parts[4].split(": ");
+            String aircraftName = aircraftDetails[1];
+            String[] airlineDetails = parts[5].split(": ");
+            String airlineName = airlineDetails[1];
+            LocalDate departureDate = LocalDate.parse(parts[6]);
+            LocalDate arrivalDate = LocalDate.parse(parts[7]);
+            String departureTime = parts[8];
+            String arrivalTime = parts[9];
+            Flight flight = flightController.getFlightById(flightId);
+
+            flightIdField.setText(String.valueOf(flightId));
+            flightNumField.setText(flightNum);
+            originField.setText(origin);
+            destinationField.setText(destination);
+            aircraftIdField.setValue(aircraftName);
+            airlineIdField.setValue(airlineName);
+            dDepartField.setValue(departureDate);
+            dArrivalField.setValue(arrivalDate);
+            tDepartField.setText(departureTime.toString());
+            tArrivalField.setText(arrivalTime.toString());
+            availabilityCheckBox.setSelected(flight.getAvailability());
+        }
+    }
+
+    
+ 
     @FXML
     private void handleUpdateFlight() {
         try {
@@ -242,5 +285,51 @@ public class FlightViewService {
         alert.setHeaderText(header);
         alert.setContentText(content);
         alert.showAndWait();
+    }
+    @FXML
+	public void switchToHome(ActionEvent event) throws IOException {
+	    	DBUtils.changeScene(event, "/views/admin/HomePage.fxml", "Admin Dashboard", null);
+	
+	}
+    @FXML
+    public void switchToAdminRoom(ActionEvent event) throws IOException {
+    	DBUtils.changeScene(event, "/views/admin/RoomManagement.fxml", "Admin Dashboard", null);
+    }
+    
+    @FXML
+    public void switchToAdminAircraft(ActionEvent event) throws IOException {
+    	DBUtils.changeScene(event, "/views/admin/Aircraft-view.fxml", "Admin Dashboard", null);
+    }
+    
+    @FXML
+    public void switchToAdminAirline(ActionEvent event) throws IOException {
+    	DBUtils.changeScene(event, "/views/admin/Airline-view.fxml", "Admin Dashboard", null);
+    }
+    @FXML
+    public void switchToAdminHotel(ActionEvent event) throws IOException {
+    	DBUtils.changeScene(event, "/views/admin/Hotel-view.fxml", "Admin Dashboard", null);
+    }
+    @FXML
+    public void switchToServices(ActionEvent event) throws IOException {
+    	DBUtils.changeScene(event, "/views/admin/services.fxml", "Admin Dashboard", null);
+    }
+    @FXML
+    public void switchToAdminUser(ActionEvent event) throws IOException {
+    	DBUtils.changeScene(event, "/views/admin/UserManagement.fxml", "Admin Dashboard", null);
+    }
+    
+    @FXML
+    public void logout(ActionEvent event) throws IOException {
+    	DBUtils.changeScene(event, "/views/auth/Welcome-view.fxml", "Welcome", null);
+    }
+    
+    @FXML
+    public void BackPage(ActionEvent event) throws IOException {
+    	DBUtils.changeScene(event, "/views/auth/Services.fxml", "Admin Dashboard", null);
+    }
+    
+    @FXML
+    public void switchToAdminFlight(ActionEvent event) throws IOException {
+    	DBUtils.changeScene(event, "/views/admin/Flight-view.fxml", "Admin Dashboard", null);
     }
 }

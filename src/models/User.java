@@ -39,6 +39,7 @@ public class User {
 			this.setRole(role);
 		}
 		
+		
 		public int getUserId() {
 			return user_id;
 		}

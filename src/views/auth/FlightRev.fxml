@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="613.0" prefWidth="485.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="service.RevflightViewService">
+   <children>
+      <TextField fx:id="FlightNumField" layoutX="150.0" layoutY="50.0" visible="false" />
+      
+      <Label layoutX="37.0" layoutY="76.0" text="passanger Category" />
+      <RadioButton fx:id="AdultRadioButton" layoutX="156.0" layoutY="76.0" mnemonicParsing="false" text="Adult" />
+      <RadioButton fx:id="InfantRadioButton" layoutX="238.0" layoutY="76.0" mnemonicParsing="false" text="Infant" />
+      <RadioButton fx:id="StudantRadioButton" layoutX="321.0" layoutY="76.0" mnemonicParsing="false" text="Studant" />
+      <RadioButton fx:id="BabyRadioButton" layoutX="394.0" layoutY="76.0" mnemonicParsing="false" text="Baby" />
+      
+      <Label layoutX="78.0" layoutY="117.0" text="FullName" />
+      <Label layoutX="80.0" layoutY="168.0" text="passport" />
+      <Button layoutX="77.0" layoutY="294.0" mnemonicParsing="false" onAction="#handleContinue" text="Continuer" />
+      <Label layoutX="29.0" layoutY="28.0" text="rev flight">
+         <font>
+            <Font name="System Bold" size="23.0" />
+         </font>
+      </Label>
+      <TextField fx:id="fullNameField" layoutX="148.0" layoutY="113.0" />
+      <TextField fx:id="passportField" layoutX="148.0" layoutY="164.0" />
+      <ComboBox fx:id="SeatTypeField" layoutX="148.0" layoutY="224.0" prefWidth="150.0" />
+      <Label layoutX="77.0" layoutY="228.0" prefHeight="18.0" prefWidth="53.0" text="SeatClass" />
+      <Button layoutX="315.0" layoutY="294.0" mnemonicParsing="false" onAction="#handlePaiment" prefHeight="26.0" prefWidth="69.0" text="payer" />
+      <Label layoutX="80.0" layoutY="364.0" prefHeight="44.0" prefWidth="91.0" text="prix à payer : " />
+      <Label fx:id="pricetot" layoutX="179.0" layoutY="364.0" prefHeight="44.0" prefWidth="91.0" />
+      <Label layoutX="77.0" layoutY="421.0" prefHeight="44.0" prefWidth="80.0" text="Num Seat :" />
+      <Label fx:id="numSeat" layoutX="177.0" layoutY="421.0" prefHeight="44.0" prefWidth="91.0" />
+      <TextField fx:id="flightIdField" layoutX="148.0" layoutY="32.0" prefHeight="26.0" prefWidth="118.0" promptText="flightId" />
+      <TextField fx:id="userIdField" layoutX="291.0" layoutY="32.0" prefHeight="26.0" prefWidth="118.0" promptText="userId" />
+
+   </children>
+</AnchorPane>

@@ -1,13 +1,17 @@
 package service;
 
+import java.io.IOException;
+
 import controllers.AircraftController;
+import controllers.DBUtils;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import models.Aircraft;
 
-import java.util.List;
-
 public class AircraftViewService {
+
     @FXML
     private TextField aircraftIdField;
     @FXML
@@ -22,6 +26,9 @@ public class AircraftViewService {
     private ListView<String> aircraftListView;
 
     private AircraftController aircraftController;
+    private Aircraft selectedAircraft;
+ 
+
 
     public AircraftViewService() {
         aircraftController = new AircraftController();
@@ -30,6 +37,7 @@ public class AircraftViewService {
     @FXML
     private void initialize() {
         refreshAircraftList();
+      
     }
 
     @FXML
@@ -89,6 +97,7 @@ public class AircraftViewService {
         }
     }
 
+
     @FXML
     private void handleGetAircraftById() {
         try {
@@ -129,4 +138,62 @@ public class AircraftViewService {
         alert.setContentText(content);
         alert.showAndWait();
     }
+    
+    @FXML
+
+    private void handleAircraftSelection(MouseEvent event) {
+    	 String selectedAircraftString = aircraftListView.getSelectionModel().getSelectedItem();
+        if (selectedAircraftString != null) {
+            int aircraftId = Integer.parseInt(selectedAircraftString.split(" - ")[0]);
+            Aircraft selectedAircraft = aircraftController.getAircraftById(aircraftId);
+            if (selectedAircraft != null) {
+                aircraftIdField.setText(String.valueOf(selectedAircraft.getAircraft_id()));
+                modelField.setText(selectedAircraft.getModel());
+                economicCapField.setText(String.valueOf(selectedAircraft.getEconomic_cap()));
+                businessCapField.setText(String.valueOf(selectedAircraft.getBusiness_cap()));
+                firstCapField.setText(String.valueOf(selectedAircraft.getFirst_cap()));
+            }
+        }
+    }
+    @FXML
+   	public void switchToHome(ActionEvent event) throws IOException {
+   	    	DBUtils.changeScene(event, "/views/admin/HomePage.fxml", "Admin Dashboard", null);
+   	
+   	}
+       @FXML
+       public void switchToAdminRoom(ActionEvent event) throws IOException {
+       	DBUtils.changeScene(event, "/views/admin/RoomManagement.fxml", "Admin Dashboard", null);
+       }
+       
+       @FXML
+       public void switchToAdminAircraft(ActionEvent event) throws IOException {
+       	DBUtils.changeScene(event, "/views/admin/Aircraft-view.fxml", "Admin Dashboard", null);
+       }
+       
+       @FXML
+       public void switchToAdminAirline(ActionEvent event) throws IOException {
+       	DBUtils.changeScene(event, "/views/admin/Airline-view.fxml", "Admin Dashboard", null);
+       }
+       @FXML
+       public void switchToAdminHotel(ActionEvent event) throws IOException {
+       	DBUtils.changeScene(event, "/views/admin/Hotel-view.fxml", "Admin Dashboard", null);
+       }
+       @FXML
+       public void handleSwitchServices(ActionEvent event) throws IOException {
+       	DBUtils.changeScene(event, "/views/admin/services.fxml", "Admin Dashboard", null);
+       }
+       @FXML
+       public void switchToAdminUser(ActionEvent event) throws IOException {
+       	DBUtils.changeScene(event, "/views/admin/UserManagement.fxml", "Admin Dashboard", null);
+       }
+       
+       @FXML
+       public void logout(ActionEvent event) throws IOException {
+       	DBUtils.changeScene(event, "/views/auth/Welcome-view.fxml", "Welcome", null);
+       }
+       
+       @FXML
+       public void BackPage(ActionEvent event) throws IOException {
+       	DBUtils.changeScene(event, "/views/auth/Welcome-view.fxml", "Welcome", null);
+       }
 }

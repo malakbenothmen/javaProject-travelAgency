@@ -49,7 +49,7 @@ public class LoginController implements Initializable {
 
     @FXML
     private void handleCloseButtonAction() {
-        // Fermeture de l'application JavaFX
+       
         Stage stage = (Stage) closeBtn.getScene().getWindow();
         stage.close();
     }

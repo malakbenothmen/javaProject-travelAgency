@@ -21,7 +21,7 @@ public class FlightReservation {
 	public Flight getFlight() {
         return flight;
     }
-
+ 
     public void setFlight(Flight flight) {
         this.flight = flight;
     }

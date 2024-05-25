@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.control.TableColumn?>
+
+<AnchorPane fx:id="rootPane" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="service.FlightRevAdminService">
+    <children>
+        <!-- Vos autres éléments visuels ici -->
+
+        <TableView fx:id="tableViewRv" layoutX="20.0" layoutY="100.0" prefHeight="400.0" prefWidth="860.0">
+            <columns>
+                <TableColumn fx:id="revIdCol" prefWidth="100.0" text="Reservation ID"/>
+                <TableColumn fx:id="flightNumCol" prefWidth="100.0" text="Flight Number"/>
+                <TableColumn fx:id="fullNameCol" prefWidth="150.0" text="Full Name"/>
+                <TableColumn fx:id="categoryCol" prefWidth="100.0" text="Category"/>
+                <TableColumn fx:id="classCol" prefWidth="100.0" text="Class"/>
+                <TableColumn fx:id="passportCol" prefWidth="100.0" text="Passport"/>
+                <TableColumn fx:id="seatCol" prefWidth="100.0" text="Seat Number"/>
+            </columns>
+        </TableView>
+
+        <ChoiceBox fx:id="airlineNameField" layoutX="20.0" layoutY="40.0" prefWidth="150.0"/>
+        <DatePicker fx:id="dDepartField" layoutX="200.0" layoutY="40.0"/>
+        <Button layoutX="380.0" layoutY="40.0" mnemonicParsing="false" onAction ="#searchBtnAction" text="Search"/>
+    </children>
+</AnchorPane>

@@ -1,8 +1,13 @@
 package service;
 
+import java.io.IOException;
+
 import controllers.AirlineController;
+import controllers.DBUtils;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import models.Airline;
 
 public class AirlineViewService {
@@ -69,6 +74,10 @@ public class AirlineViewService {
             showAlert("Deletion Failed", "Airline Not Found", "No airline found with the provided ID.");
         }
     }
+    @FXML
+    public void switchToAdminHotel(ActionEvent event) throws IOException {
+    	DBUtils.changeScene(event, "/views/admin/Hotel-view.fxml", "Admin Dashboard", null);
+    }
 
     @FXML
     private void handleGetAirlineById() {
@@ -88,6 +97,22 @@ public class AirlineViewService {
             airlineListView.getItems().add(airline.getAirline_id()+ "-" +airline.getName() + " - "+ airline.getConvention());
         }
     }
+    
+    @FXML
+    private void handleAirlineSelection(MouseEvent event) {
+        String selectedAirlineString = airlineListView.getSelectionModel().getSelectedItem();
+        if (selectedAirlineString != null) {
+            String[] parts = selectedAirlineString.split(" - ");
+            String airlineId = parts[0]; 
+
+            Airline selectedAirline = airlineController.getAirlineById(airlineId);
+            if (selectedAirline != null) {
+                airlineIdField.setText(String.valueOf(selectedAirline.getAirline_id()));
+                nameField.setText(selectedAirline.getName());
+                conventionField.setText(String.valueOf(selectedAirline.getConvention()));
+            }
+        }
+    }
 
     private void clearFields() {
         nameField.clear();
@@ -101,5 +126,46 @@ public class AirlineViewService {
         alert.setHeaderText(header);
         alert.setContentText(content);
         alert.showAndWait();
+    }
+    @FXML
+	public void switchToHome(ActionEvent event) throws IOException {
+	    	DBUtils.changeScene(event, "/views/admin/HomePage.fxml", "Admin Dashboard", null);
+	
+	}
+    @FXML
+    public void switchToAdminRoom(ActionEvent event) throws IOException {
+    	DBUtils.changeScene(event, "/views/admin/RoomManagement.fxml", "Admin Dashboard", null);
+    }
+    
+    @FXML
+    public void switchToAdminAircraft(ActionEvent event) throws IOException {
+    	DBUtils.changeScene(event, "/views/admin/Aircraft-view.fxml", "Admin Dashboard", null);
+    }
+    
+    @FXML
+    public void switchToAdminAirline(ActionEvent event) throws IOException {
+    	DBUtils.changeScene(event, "/views/admin/Airline-view.fxml", "Admin Dashboard", null);
+    }
+    @FXML
+    public void switchToAdminHotel(ActionEvent event) throws IOException {
+    	DBUtils.changeScene(event, "/views/admin/Hotel-view.fxml", "Admin Dashboard", null);
+    }
+    @FXML
+    public void switchToServices(ActionEvent event) throws IOException {
+    	DBUtils.changeScene(event, "/views/admin/services.fxml", "Admin Dashboard", null);
+    }
+    @FXML
+    public void switchToAdminUser(ActionEvent event) throws IOException {
+    	DBUtils.changeScene(event, "/views/admin/UserManagement.fxml", "Admin Dashboard", null);
+    }
+    
+    @FXML
+    public void logout(ActionEvent event) throws IOException {
+    	DBUtils.changeScene(event, "/views/auth/Welcome-view.fxml", "Welcome", null);
+    }
+    
+    @FXML
+    public void BackPage(ActionEvent event) throws IOException {
+    	DBUtils.changeScene(event, "/views/auth/Welcome-view.fxml", "Welcome", null);
     }
 }

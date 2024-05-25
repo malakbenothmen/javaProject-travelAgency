@@ -2,8 +2,6 @@ package application;
 
 
 
-
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -15,7 +13,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/views/auth/flight.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/views/auth/SearchFlight.fxml")); //auth/SearchFlight.fxml /FlightRev.fxml  
             Scene scene = new Scene(root);
 
             String cssFile = String.valueOf(getClass().getResource("/views/css/welcome.css"));

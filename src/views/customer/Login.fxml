@@ -14,7 +14,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #1E253C;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
 <children>
-    <ImageView fitHeight="524.0" fitWidth="900.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="76.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+    <ImageView fitHeight="583.0" fitWidth="900.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <image>
             <Image url="@../images/welcome3.jpg" />
         </image>
@@ -27,8 +27,14 @@
             <Font size="21.0" />
         </font>
     </Button>
-    <AnchorPane fx:id="back" layoutX="331.0" layoutY="118.0" opacity="0.81" prefHeight="350.0" prefWidth="334.0" style="-fx-background-color: #E2EAF4;" AnchorPane.bottomAnchor="125.0" AnchorPane.rightAnchor="536.0" AnchorPane.topAnchor="90.0" />
-      <Label fx:id="loginTitle" layoutX="120.0" layoutY="140.0" text="Customer Login" />
+    <AnchorPane fx:id="back" layoutX="331.0" layoutY="118.0" opacity="0.81" prefHeight="350.0" prefWidth="334.0" style="-fx-background-color: #E2EAF4;" AnchorPane.bottomAnchor="125.0" AnchorPane.rightAnchor="536.0" AnchorPane.topAnchor="90.0">
+         <children>
+            <Label layoutX="81.0" layoutY="36.0" text="Customer Login">
+               <font>
+                  <Font name="System Bold" size="23.0" />
+               </font>
+            </Label>
+         </children></AnchorPane>
       <Label fx:id="errorInfoLabel" alignment="CENTER" layoutX="124.0" layoutY="413.0" prefHeight="20.0" prefWidth="80.0" text="not a user ? " textFill="#262222" AnchorPane.leftAnchor="124.0" AnchorPane.rightAnchor="696.0" AnchorPane.topAnchor="413.0">
          <font>
             <Font size="14.0" />
@@ -41,12 +47,12 @@
             <Font size="17.0" />
          </font>
       </TextField>
-      <Button fx:id="btn_login" layoutX="100.0" layoutY="349.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="80.0" style="-fx-background-color: #55D7DC;" text="Log In">
+      <Button fx:id="btn_login" layoutX="100.0" layoutY="349.0" mnemonicParsing="false" onAction="#logInUser" prefHeight="38.0" prefWidth="80.0" style="-fx-background-color: #55D7DC;" text="Log In">
          <font>
             <Font size="17.0" />
          </font>
       </Button>
-      <Button fx:id="backBtn" layoutX="210.0" layoutY="349.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="80.0" text="Back" textFill="WHITE">
+      <Button fx:id="backBtn" layoutX="210.0" layoutY="349.0" mnemonicParsing="false" onAction="#BackToWelcome" prefHeight="38.0" prefWidth="80.0" text="Back" textFill="WHITE">
          <font>
             <Font size="17.0" />
          </font>

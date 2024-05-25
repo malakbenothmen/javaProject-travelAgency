@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -28,6 +29,12 @@ public class WelcomeController implements Initializable {
     @FXML
     private Label welcomeLabel;
 
+    @FXML
+    private Button adminLoginBtn;
+
+    @FXML
+    private Button closeBtn;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Animation du label de bienvenue
@@ -43,22 +50,13 @@ public class WelcomeController implements Initializable {
 
     @FXML
     public void switchToCustomerLogin(ActionEvent event) {
-        // Redirection vers la vue de connexion client
         DBUtils.changeScene(event, "/views/customer/Login.fxml", "Log in", null);
     }
 
     @FXML
     public void switchToAdminLogin(ActionEvent event) throws IOException {
-        // Redirection vers la vue de connexion admin
-        Parent root = FXMLLoader.load(getClass().getResource("/admin/Login-view.fxml"));
-        Stage stage = (Stage) customerLoginBtn.getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+    	DBUtils.changeScene(event, "/views/admin/HomePage.fxml", "Admin Dashboard", null);
     }
-
-    @FXML
-    private Button closeBtn;
 
     @FXML
     private void handleCloseButtonAction() {
@@ -66,4 +64,5 @@ public class WelcomeController implements Initializable {
         Stage stage = (Stage) closeBtn.getScene().getWindow();
         stage.close();
     }
+    
 }

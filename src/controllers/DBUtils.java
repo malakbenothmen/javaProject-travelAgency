@@ -14,13 +14,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
-
+ 
 public class DBUtils {
 
 	public static void changeScene(ActionEvent event, String fxmlFile, String title, String email) {
 	    Parent root = null;
 	    try {
-	        FXMLLoader loader = new FXMLLoader(DBUtils.class.getResource(fxmlFile));
+	        FXMLLoader loader = new FXMLLoader(DBUtils.class.getResource(fxmlFile)); 
 	        root = loader.load();
 
 	        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -29,7 +29,7 @@ public class DBUtils {
 	        stage.setScene(scene);
 	        stage.show();
 
-	        if (fxmlFile.equals("/views/auth/logged.fxml")) { // logged in
+	        if (fxmlFile.equals("/views/customer/HomePage.fxml")) { // logged in
 	            LoggedInController loggedInController = loader.getController();
 	            loggedInController.setUserInfo(email);
 	        }
@@ -63,14 +63,14 @@ public class DBUtils {
                 statementInsert.setString(2, cin);
                 statementInsert.setString(3, passport);
                 statementInsert.setString(4, phone);
-                statementInsert.setString(5, email);
+                statementInsert.setString(5, email); 
                 statementInsert.setString(6, password);
                 statementInsert.setString(7, address);
                 statementInsert.setString(8, "User");
                 statementInsert.setString(9, "Active");
                 statementInsert.executeUpdate();
 
-                changeScene(event, "/views/auth/logged.fxml", "Welcome", email);
+                changeScene(event, "/views/customer/HomePage.fxml", "Welcome", email);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -123,7 +123,7 @@ public class DBUtils {
                     String retrievedPassword = resultSet.getString("password");
                     // compare passwords
                     if (retrievedPassword.equals(password)) {
-                        changeScene(event, "/views/auth/logged.fxml", "Welcome", email);
+                        changeScene(event, "/views/customer/HomePage.fxml", "Customer Dashboard", email);
                     } else {
                         System.out.println("Passwords did not match!");
                         Alert alert = new Alert(Alert.AlertType.ERROR);
